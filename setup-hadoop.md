@@ -28,14 +28,19 @@ ssh-keygen -t rsa
 ssh-copy-id hadoopuser@hadoop-master # Doesn't work always
 ssh-copy-id hadoopuser@hadoop-slave1 # Manually copying the public
 ssh-copy-id hadoopuser@hadoop-slave2 # Key to each instance 
-                                     # authorized_keys works isntead
-sudo echo '<configuration>
+                                     # authorized_keys works instead
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
 <property>
 <name>fs.defaultFS</name>
 <value>hdfs://hadoop-master:9000</value>
 </property>
-</configuration>' >> /usr/local/hadoop/etc/hadoop/core-site.xml
-sudo echo '<configuration>
+</configuration>
+' > /usr/local/hadoop/etc/hadoop/core-site.xml
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
 <property>
 <name>dfs.namenode.name.dir</name><value>/usr/local/hadoop/data/nameNode</value>
 </property>
@@ -46,9 +51,9 @@ sudo echo '<configuration>
 <name>dfs.replication</name>
 <value>2</value>
 </property>
-</configuration>' >> /usr/local/hadoop/etc/hadoop/hdfs-site.xml  
+</configuration>' > /usr/local/hadoop/etc/hadoop/hdfs-site.xml  
 sudo echo 'hadoop-slave1
-hadoop-slave2' >> /usr/local/hadoop/etc/hadoop/workers
+hadoop-slave2' > /usr/local/hadoop/etc/hadoop/workers
 scp /usr/local/hadoop/etc/hadoop/* hadoop-slave1:/usr/local/hadoop/etc/hadoop/
 scp /usr/local/hadoop/etc/hadoop/* hadoop-slave2:/usr/local/hadoop/etc/hadoop/
 source /etc/environment
@@ -75,8 +80,13 @@ su - hadoopuser
 ```
 ### Configure YARN
 ```
-sudo echo '<property>
+# Unsure if it's okey to add another configuration 
+sudo echo '<?xml version="1.0"?>
+<configuration>
+<property>
 <name>yarn.resourcemanager.hostname</name>
 <value>hadoop-master</value>
-</property>' >> /usr/local/hadoop/etc/hadoop/yarn-site.xml    
+</property>
+</configuration>' >> /usr/local/hadoop/etc/hadoop/yarn-site.xml    
 ```
+
