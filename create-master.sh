@@ -166,6 +166,6 @@ do
 done
 
 # AFTER CLUSTER IS UP
-/home/ubuntu/hadoop-2.7.3/bin/hadoop namenode -format
-/home/ubuntu/hadoop-2.7.3/sbin/start-all.sh
-/usr/local/spark/sbin/start-master.sh
+#/home/ubuntu/hadoop-2.7.3/bin/hadoop namenode -format
+#/home/ubuntu/hadoop-2.7.3/sbin/start-all.sh
+#/usr/local/spark/sbin/start-master.sh
