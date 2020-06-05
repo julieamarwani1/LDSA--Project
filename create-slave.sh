@@ -28,7 +28,7 @@ sudo service sshd restart
 mkdir .ssh
 echo $PUBLIC_KEY >> $HOME/.ssh/authorized_keys
 
-sudo apt-get install openjdk-8-jdk
+sudo apt-get install openjdk-8-jdk -y
 wget https://archive.apache.org/dist/hadoop/core/hadoop-2.7.3/hadoop-2.7.3.tar.gz
 tar -xvf hadoop-2.7.3.tar.gz
 echo 'if [ -f /etc/bashrc ]; then
@@ -43,8 +43,8 @@ export HADOOP_HDFS_HOME=$HOME/hadoop-2.7.3
 export YARN_HOME=$HOME/hadoop-2.7.3
 export PATH=$PATH:$HOME/hadoop-2.7.3/bin
 
-export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_101
-export PATH=/usr/lib/jvm/jdk1.8.0_101/bin:$PATH' >> .bashrc
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH' >> .bashrc
 source .bashrc
 
 echo "master" > /home/ubuntu/hadoop-2.7.3/etc/hadoop/masters
@@ -71,7 +71,7 @@ echo '# Licensed to the Apache Software Foundation (ASF) under one
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_101
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-"/etc/hadoop"}
 for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
   if [ "$HADOOP_CLASSPATH" ]; then
@@ -160,7 +160,7 @@ cp /usr/local/spark/conf/spark-env.sh.template /usr/local/spark/conf/spark-env.s
 echo "SPARK_MASTER_HOST='$(hostname -I)'" >> /usr/local/spark/conf/spark-env.sh
 
 # Check placement
-echo "JAVA_HOME=/usr/lib/jvm/jdk1.8.0_101" >> /usr/local/spark/conf/spark-env.sh
+echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /usr/local/spark/conf/spark-env.sh
 
 
 for tmp in {1..$NUMBER_OF_SLAVES}
