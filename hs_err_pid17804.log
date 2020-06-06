@@ -1,0 +1,935 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 28311552 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2627), pid=17804, tid=0xa72b0b40
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_101-b13) (build 1.8.0_101-b13)
+# Java VM: Java HotSpot(TM) Server VM (25.101-b13 mixed mode linux-x86 )
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0xa4520c00):  VMThread [stack: 0xa7231000,0xa72b1000] [id=17828]
+
+Stack: [0xa7231000,0xa72b1000],  sp=0xa72af720,  free space=505k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x8d431f]  VMError::report_and_die()+0x16f
+V  [libjvm.so+0x38ddb5]  report_vm_out_of_memory(char const*, int, unsigned int, VMErrorType, char const*)+0x55
+V  [libjvm.so+0x756326]  os::Linux::commit_memory_impl(char*, unsigned int, bool)+0xe6
+V  [libjvm.so+0x7567f8]  os::pd_commit_memory(char*, unsigned int, unsigned int, bool)+0x28
+V  [libjvm.so+0x75071c]  os::commit_memory(char*, unsigned int, unsigned int, bool)+0x2c
+V  [libjvm.so+0x7bb9c8]  PSVirtualSpace::expand_by(unsigned int)+0x48
+V  [libjvm.so+0x7bcaca]  PSYoungGen::resize_generation(unsigned int, unsigned int)+0xda
+V  [libjvm.so+0x7bbdf9]  PSYoungGen::resize(unsigned int, unsigned int)+0x19
+V  [libjvm.so+0x7b9725]  PSScavenge::invoke_no_policy()+0xd15
+V  [libjvm.so+0x7b9ee8]  PSScavenge::invoke()+0x28
+V  [libjvm.so+0x777d8a]  ParallelScavengeHeap::failed_mem_allocate(unsigned int)+0x5a
+V  [libjvm.so+0x8d5dea]  VM_ParallelGCFailedAllocation::doit()+0x7a
+V  [libjvm.so+0x8df4a7]  VM_Operation::evaluate()+0x47
+V  [libjvm.so+0x8dd583]  VMThread::evaluate_operation(VM_Operation*)+0xb3
+V  [libjvm.so+0x8dd920]  VMThread::loop()+0x1b0
+V  [libjvm.so+0x8ddd85]  VMThread::run()+0x85
+V  [libjvm.so+0x758969]  java_start(Thread*)+0x119
+C  [libpthread.so.0+0x63a6]  start_thread+0xf6
+
+VM_Operation (0xa01aacb4): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x9f918800
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x9f9aa400 JavaThread "rpc-server-4-2" daemon [_thread_blocked, id=17887, stack(0x9d198000,0x9d1e9000)]
+  0x9f9a9000 JavaThread "rpc-server-4-1" daemon [_thread_blocked, id=17886, stack(0x9d1e9000,0x9d23a000)]
+  0x9f99e400 JavaThread "element-tracking-store-worker" daemon [_thread_blocked, id=17884, stack(0x9d477000,0x9d4c8000)]
+  0x088ab400 JavaThread "spark-listener-group-executorManagement" daemon [_thread_blocked, id=17883, stack(0x9d4c8000,0x9d519000)]
+  0x088aa000 JavaThread "spark-listener-group-appStatus" daemon [_thread_blocked, id=17882, stack(0x9d519000,0x9d56a000)]
+  0x08cc9800 JavaThread "context-cleaner-periodic-gc" daemon [_thread_blocked, id=17881, stack(0x9d56a000,0x9d5bb000)]
+  0x08cc8800 JavaThread "Spark Context Cleaner" daemon [_thread_blocked, id=17880, stack(0x9eb18000,0x9eb69000)]
+  0x08f3fc00 JavaThread "shuffle-boss-6-1" daemon [_thread_in_native, id=17879, stack(0x9eb69000,0x9ebba000)]
+  0xa733d000 JavaThread "rpc-client-1-1" daemon [_thread_in_native, id=17873, stack(0x9ebba000,0x9ec0b000)]
+  0x08bba000 JavaThread "netty-rpc-connection-0" daemon [_thread_blocked, id=17872, stack(0x9ec0b000,0x9ec5c000)]
+  0x9ea94c00 JavaThread "appclient-registration-retry-thread" daemon [_thread_blocked, id=17871, stack(0x9ec5c000,0x9ecad000)]
+  0x9ea93c00 JavaThread "appclient-register-master-threadpool-0" daemon [_thread_blocked, id=17870, stack(0x9ecad000,0x9ecfe000)]
+  0x9ea8ec00 JavaThread "driver-revive-thread" daemon [_thread_blocked, id=17869, stack(0x9ecfe000,0x9ed4f000)]
+  0x08a51400 JavaThread "dag-scheduler-event-loop" daemon [_thread_blocked, id=17868, stack(0x9ed4f000,0x9eda0000)]
+  0xa731f000 JavaThread "netty-rpc-env-timeout" daemon [_thread_blocked, id=17867, stack(0x9e8bc000,0x9e90d000)]
+  0x09618800 JavaThread "Timer-1" daemon [_thread_blocked, id=17865, stack(0x9e90d000,0x9e95e000)]
+  0x09617c00 JavaThread "Timer-0" daemon [_thread_blocked, id=17864, stack(0x9e95e000,0x9e9af000)]
+  0xa7313c00 JavaThread "heartbeat-receiver-event-loop-thread" daemon [_thread_blocked, id=17863, stack(0x9e9af000,0x9ea00000)]
+  0x08d16c00 JavaThread "SparkUI-36" daemon [_thread_blocked, id=17862, stack(0x9eda0000,0x9edf1000)]
+  0x08d15800 JavaThread "SparkUI-35" daemon [_thread_blocked, id=17861, stack(0x9edf1000,0x9ee42000)]
+  0x08d14400 JavaThread "SparkUI-34" daemon [_thread_blocked, id=17860, stack(0x9ee42000,0x9ee93000)]
+  0x08d13000 JavaThread "SparkUI-33" daemon [_thread_blocked, id=17859, stack(0x9ee93000,0x9eee4000)]
+  0x08d65400 JavaThread "SparkUI-32" daemon [_thread_blocked, id=17858, stack(0x9eee4000,0x9ef35000)]
+  0x08d64000 JavaThread "SparkUI-31" daemon [_thread_blocked, id=17857, stack(0x9ef35000,0x9ef86000)]
+  0x08d62c00 JavaThread "SparkUI-30-acceptor-0@132353b-ServerConnector@1f5c9ed{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}" daemon [_thread_in_native, id=17856, stack(0x9ef86000,0x9efd7000)]
+  0x08a23400 JavaThread "SparkUI-29" daemon [_thread_in_native, id=17855, stack(0x9efd7000,0x9f028000)]
+  0x08957800 JavaThread "refresh progress" daemon [_thread_blocked, id=17854, stack(0x9f128000,0x9f179000)]
+  0x08939800 JavaThread "RemoteBlock-temp-file-clean-thread" daemon [_thread_blocked, id=17853, stack(0x9f279000,0x9f2ca000)]
+  0x0890e800 JavaThread "map-output-dispatcher-7" daemon [_thread_blocked, id=17852, stack(0x9f2ca000,0x9f31b000)]
+  0x0890d400 JavaThread "map-output-dispatcher-6" daemon [_thread_blocked, id=17851, stack(0x9f31b000,0x9f36c000)]
+  0x08709400 JavaThread "map-output-dispatcher-5" daemon [_thread_blocked, id=17850, stack(0x9f36c000,0x9f3bd000)]
+  0x08707c00 JavaThread "map-output-dispatcher-4" daemon [_thread_blocked, id=17849, stack(0x9f3bd000,0x9f40e000)]
+  0x08706c00 JavaThread "map-output-dispatcher-3" daemon [_thread_blocked, id=17848, stack(0x9f40e000,0x9f45f000)]
+  0x08705400 JavaThread "map-output-dispatcher-2" daemon [_thread_blocked, id=17847, stack(0x9f45f000,0x9f4b0000)]
+  0x0870c000 JavaThread "map-output-dispatcher-1" daemon [_thread_blocked, id=17846, stack(0x9f4b0000,0x9f501000)]
+  0x08704400 JavaThread "map-output-dispatcher-0" daemon [_thread_blocked, id=17845, stack(0x9f70d000,0x9f75e000)]
+  0x08719800 JavaThread "rpc-boss-3-1" daemon [_thread_blocked, id=17844, stack(0x9f75e000,0x9f7af000)]
+  0x08693400 JavaThread "dispatcher-event-loop-1" daemon [_thread_blocked, id=17843, stack(0x9f7af000,0x9f800000)]
+  0x0869a400 JavaThread "dispatcher-event-loop-0" daemon [_thread_blocked, id=17842, stack(0xa010c000,0xa015d000)]
+  0x9f918800 JavaThread "Thread-4" [_thread_blocked, id=17841, stack(0xa015d000,0xa01ae000)]
+  0x9f90a400 JavaThread "Thread-3" [_thread_in_native, id=17840, stack(0xa01ae000,0xa01ff000)]
+  0x9f901c00 JavaThread "pool-1-thread-1" [_thread_blocked, id=17839, stack(0xa2437000,0xa2488000)]
+  0xa008e000 JavaThread "process reaper" daemon [_thread_blocked, id=17837, stack(0xa2488000,0xa24a1000)]
+  0xa454b800 JavaThread "Service Thread" daemon [_thread_blocked, id=17834, stack(0xa404e000,0xa409f000)]
+  0xa4548400 JavaThread "C1 CompilerThread1" daemon [_thread_blocked, id=17833, stack(0xa40a0000,0xa4120000)]
+  0xa4546400 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=17832, stack(0xa4121000,0xa41a1000)]
+  0xa4544800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=17831, stack(0xa41a1000,0xa41f2000)]
+  0xa4528400 JavaThread "Finalizer" daemon [_thread_blocked, id=17830, stack(0xa4639000,0xa468a000)]
+  0xa4525400 JavaThread "Reference Handler" daemon [_thread_blocked, id=17829, stack(0xa468a000,0xa46db000)]
+  0xf6d11800 JavaThread "main" [_thread_in_native, id=17825, stack(0xf6e6a000,0xf6eba000)]
+
+Other Threads:
+=>0xa4520c00 VMThread [stack: 0xa7231000,0xa72b1000] [id=17828]
+  0xa454f800 WatcherThread [stack: 0xa3fce000,0xa404e000] [id=17835]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0xf6d0efc0] Threads_lock - owner thread: 0xa4520c00
+[0xf6d0f420] Heap_lock - owner thread: 0x9f918800
+
+Heap:
+ PSYoungGen      total 60928K, used 4344K [0xd22c0000, 0xd65c0000, 0xe7800000)
+  eden space 56576K, 0% used [0xd22c0000,0xd22c0000,0xd5a00000)
+  from space 4352K, 99% used [0xd6180000,0xd65be008,0xd65c0000)
+  to   space 4352K, 0% used [0xd5a00000,0xd5a00000,0xd5e40000)
+ ParOldGen       total 60672K, used 59103K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 97% used [0xa7800000,0xab1b7dd8,0xab340000)
+ Metaspace       used 24556K, capacity 24756K, committed 24832K, reserved 24880K
+
+Card table byte_map: [0xa75ff000,0xa7800000] byte_map_base: 0xa70c3000
+
+Marking Bits: (ParMarkBitMap*) 0xf798e8e0
+ Begin Bits: [0xa5100000, 0xa6100000)
+ End Bits:   [0xa6100000, 0xa7100000)
+
+Polling page: 0xf7fbd000
+
+CodeCache: size=245760Kb used=4436Kb max_used=4456Kb free=241323Kb
+ bounds [0xe7cb7000, 0xe8117000, 0xf6cb7000]
+ total_blobs=2231 nmethods=2018 adapters=127
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 14.251 Thread 0xa4546400 2250       4       java.lang.String::codePointAt (36 bytes)
+Event: 14.252 Thread 0xa4546400 nmethod 2250 0xe8114d88 code [0xe8114e80, 0xe8114f50]
+Event: 14.252 Thread 0xa4546400 2241       4       scala.collection.AbstractTraversable::<init> (29 bytes)
+Event: 14.252 Thread 0xa4546400 nmethod 2241 0xe7e49448 code [0xe7e49540, 0xe7e49590]
+Event: 14.262 Thread 0xa4548400 2280       3       java.lang.Class$AnnotationData::<init> (20 bytes)
+Event: 14.262 Thread 0xa4548400 nmethod 2280 0xe7ea3108 code [0xe7ea3220, 0xe7ea3360]
+Event: 14.296 Thread 0xa4548400 2281       3       java.lang.reflect.Proxy$KeyFactory::apply (66 bytes)
+Event: 14.296 Thread 0xa4548400 nmethod 2281 0xe7fa7488 code [0xe7fa7620, 0xe7fa7a90]
+Event: 14.299 Thread 0xa4548400 2282       3       sun.reflect.annotation.AnnotationParser$1::run (40 bytes)
+Event: 14.300 Thread 0xa4548400 nmethod 2282 0xe7f80388 code [0xe7f80560, 0xe7f81050]
+
+GC Heap History (10 events):
+Event: 9.960 GC heap after
+Heap after GC invocations=15 (full 1):
+ PSYoungGen      total 40704K, used 3164K [0xd22c0000, 0xd5cc0000, 0xe7800000)
+  eden space 37376K, 0% used [0xd22c0000,0xd22c0000,0xd4740000)
+  from space 3328K, 95% used [0xd4b40000,0xd4e57070,0xd4e80000)
+  to   space 4096K, 0% used [0xd4740000,0xd4740000,0xd4b40000)
+ ParOldGen       total 28928K, used 6652K [0xa7800000, 0xa9440000, 0xd22c0000)
+  object space 28928K, 22% used [0xa7800000,0xa7e7f260,0xa9440000)
+ Metaspace       used 17930K, capacity 18103K, committed 18176K, reserved 18736K
+}
+Event: 10.289 GC heap before
+{Heap before GC invocations=16 (full 1):
+ PSYoungGen      total 40704K, used 40540K [0xd22c0000, 0xd5cc0000, 0xe7800000)
+  eden space 37376K, 100% used [0xd22c0000,0xd4740000,0xd4740000)
+  from space 3328K, 95% used [0xd4b40000,0xd4e57070,0xd4e80000)
+  to   space 4096K, 0% used [0xd4740000,0xd4740000,0xd4b40000)
+ ParOldGen       total 28928K, used 6666K [0xa7800000, 0xa9440000, 0xd22c0000)
+  object space 28928K, 23% used [0xa7800000,0xa7e82800,0xa9440000)
+ Metaspace       used 19110K, capacity 19313K, committed 19328K, reserved 19760K
+Event: 10.323 GC heap after
+Heap after GC invocations=16 (full 1):
+ PSYoungGen      total 41472K, used 2137K [0xd22c0000, 0xd6280000, 0xe7800000)
+  eden space 37376K, 0% used [0xd22c0000,0xd22c0000,0xd4740000)
+  from space 4096K, 52% used [0xd4740000,0xd4956630,0xd4b40000)
+  to   space 4096K, 0% used [0xd5e80000,0xd5e80000,0xd6280000)
+ ParOldGen       total 28928K, used 24069K [0xa7800000, 0xa9440000, 0xd22c0000)
+  object space 28928K, 83% used [0xa7800000,0xa8f817c0,0xa9440000)
+ Metaspace       used 19110K, capacity 19313K, committed 19328K, reserved 19760K
+}
+Event: 10.323 GC heap before
+{Heap before GC invocations=17 (full 2):
+ PSYoungGen      total 41472K, used 2137K [0xd22c0000, 0xd6280000, 0xe7800000)
+  eden space 37376K, 0% used [0xd22c0000,0xd22c0000,0xd4740000)
+  from space 4096K, 52% used [0xd4740000,0xd4956630,0xd4b40000)
+  to   space 4096K, 0% used [0xd5e80000,0xd5e80000,0xd6280000)
+ ParOldGen       total 28928K, used 24069K [0xa7800000, 0xa9440000, 0xd22c0000)
+  object space 28928K, 83% used [0xa7800000,0xa8f817c0,0xa9440000)
+ Metaspace       used 19110K, capacity 19313K, committed 19328K, reserved 19760K
+Event: 10.362 GC heap after
+Heap after GC invocations=17 (full 2):
+ PSYoungGen      total 41472K, used 0K [0xd22c0000, 0xd6280000, 0xe7800000)
+  eden space 37376K, 0% used [0xd22c0000,0xd22c0000,0xd4740000)
+  from space 4096K, 0% used [0xd4740000,0xd4740000,0xd4b40000)
+  to   space 4096K, 0% used [0xd5e80000,0xd5e80000,0xd6280000)
+ ParOldGen       total 60672K, used 23512K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 38% used [0xa7800000,0xa8ef6358,0xab340000)
+ Metaspace       used 19110K, capacity 19313K, committed 19328K, reserved 19760K
+}
+Event: 11.372 GC heap before
+{Heap before GC invocations=18 (full 2):
+ PSYoungGen      total 41472K, used 37376K [0xd22c0000, 0xd6280000, 0xe7800000)
+  eden space 37376K, 100% used [0xd22c0000,0xd4740000,0xd4740000)
+  from space 4096K, 0% used [0xd4740000,0xd4740000,0xd4b40000)
+  to   space 4096K, 0% used [0xd5e80000,0xd5e80000,0xd6280000)
+ ParOldGen       total 60672K, used 23512K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 38% used [0xa7800000,0xa8ef6358,0xab340000)
+ Metaspace       used 21360K, capacity 21590K, committed 21632K, reserved 21808K
+Event: 11.378 GC heap after
+Heap after GC invocations=18 (full 2):
+ PSYoungGen      total 53760K, used 3856K [0xd22c0000, 0xd6280000, 0xe7800000)
+  eden space 49664K, 0% used [0xd22c0000,0xd22c0000,0xd5340000)
+  from space 4096K, 94% used [0xd5e80000,0xd62443e8,0xd6280000)
+  to   space 4352K, 0% used [0xd5a00000,0xd5a00000,0xd5e40000)
+ ParOldGen       total 60672K, used 23516K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 38% used [0xa7800000,0xa8ef7358,0xab340000)
+ Metaspace       used 21360K, capacity 21590K, committed 21632K, reserved 21808K
+}
+Event: 13.151 GC heap before
+{Heap before GC invocations=19 (full 2):
+ PSYoungGen      total 53760K, used 38088K [0xd22c0000, 0xd6280000, 0xe7800000)
+  eden space 49664K, 68% used [0xd22c0000,0xd442ddf8,0xd5340000)
+  from space 4096K, 94% used [0xd5e80000,0xd62443e8,0xd6280000)
+  to   space 4352K, 0% used [0xd5a00000,0xd5a00000,0xd5e40000)
+ ParOldGen       total 60672K, used 23516K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 38% used [0xa7800000,0xa8ef7358,0xab340000)
+ Metaspace       used 22146K, capacity 22365K, committed 22400K, reserved 22832K
+Event: 13.173 GC heap after
+Heap after GC invocations=19 (full 2):
+ PSYoungGen      total 60928K, used 2152K [0xd22c0000, 0xd65c0000, 0xe7800000)
+  eden space 56576K, 0% used [0xd22c0000,0xd22c0000,0xd5a00000)
+  from space 4352K, 49% used [0xd5a00000,0xd5c1a280,0xd5e40000)
+  to   space 4352K, 0% used [0xd6180000,0xd6180000,0xd65c0000)
+ ParOldGen       total 60672K, used 40429K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 66% used [0xa7800000,0xa9f7b448,0xab340000)
+ Metaspace       used 22146K, capacity 22365K, committed 22400K, reserved 22832K
+}
+Event: 14.312 GC heap before
+{Heap before GC invocations=20 (full 2):
+ PSYoungGen      total 60928K, used 58728K [0xd22c0000, 0xd65c0000, 0xe7800000)
+  eden space 56576K, 100% used [0xd22c0000,0xd5a00000,0xd5a00000)
+  from space 4352K, 49% used [0xd5a00000,0xd5c1a280,0xd5e40000)
+  to   space 4352K, 0% used [0xd6180000,0xd6180000,0xd65c0000)
+ ParOldGen       total 60672K, used 40429K [0xa7800000, 0xab340000, 0xd22c0000)
+  object space 60672K, 66% used [0xa7800000,0xa9f7b448,0xab340000)
+ Metaspace       used 24556K, capacity 24756K, committed 24832K, reserved 24880K
+
+Deoptimization events (10 events):
+Event: 9.666 Thread 0x9f918800 Uncommon trap: reason=unstable_if action=reinterpret pc=0xe8065a60 method=sun.net.www.protocol.jar.Handler.parseURL(Ljava/net/URL;Ljava/lang/String;II)V @ 94
+Event: 10.180 Thread 0x9ea93c00 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0xe7da54fc method=java.util.concurrent.ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object; @ 149
+Event: 10.181 Thread 0x9ea93c00 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0xe7da54fc method=java.util.concurrent.ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object; @ 149
+Event: 10.182 Thread 0x9ea93c00 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0xe7da54fc method=java.util.concurrent.ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object; @ 149
+Event: 10.183 Thread 0x9ea93c00 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0xe7da54fc method=java.util.concurrent.ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object; @ 149
+Event: 10.262 Thread 0xa733d000 Uncommon trap: reason=class_check action=maybe_recompile pc=0xe7f01bd0 method=java.util.concurrent.ConcurrentHashMap.putVal(Ljava/lang/Object;Ljava/lang/Object;Z)Ljava/lang/Object; @ 192
+Event: 10.262 Thread 0xa733d000 Uncommon trap: reason=class_check action=maybe_recompile pc=0xe7f01bd0 method=java.util.concurrent.ConcurrentHashMap.putVal(Ljava/lang/Object;Ljava/lang/Object;Z)Ljava/lang/Object; @ 192
+Event: 10.266 Thread 0xa733d000 Uncommon trap: reason=class_check action=maybe_recompile pc=0xe7f01bd0 method=java.util.concurrent.ConcurrentHashMap.putVal(Ljava/lang/Object;Ljava/lang/Object;Z)Ljava/lang/Object; @ 192
+Event: 10.267 Thread 0xa733d000 Uncommon trap: reason=class_check action=maybe_recompile pc=0xe7f01bd0 method=java.util.concurrent.ConcurrentHashMap.putVal(Ljava/lang/Object;Ljava/lang/Object;Z)Ljava/lang/Object; @ 192
+Event: 14.002 Thread 0x9f918800 Uncommon trap: reason=unstable_if action=reinterpret pc=0xe7da2a1c method=java.lang.String.trim()Ljava/lang/String; @ 23
+
+Internal exceptions (10 events):
+Event: 10.224 Thread 0x9ea93c00 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd431bf28) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 10.226 Thread 0x9ea93c00 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd432b6c8) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 10.256 Thread 0xa733d000 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd43f2198) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 10.262 Thread 0xa733d000 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd4419190) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 10.268 Thread 0xa733d000 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd45ea418) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 10.281 Thread 0xa733d000 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd46473c0) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 13.204 Thread 0x08693400 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd3493f40) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 13.215 Thread 0x08693400 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd3561940) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 14.179 Thread 0x9f9aa400 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd4fe4118) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+Event: 14.181 Thread 0x9f9aa400 Exception <a 'java/lang/NoSuchMethodError': <clinit>> (0xd5143af0) thrown at [/HUDSON/workspace/8-2-build-linux-i586/jdk8u101/7261/hotspot/src/share/vm/prims/jni.cpp, line 1613]
+
+Events (10 events):
+Event: 14.306 loading class org/apache/spark/sql/catalyst/expressions/InputFileBlockStart done
+Event: 14.308 loading class org/apache/spark/sql/catalyst/expressions/InputFileBlockLength
+Event: 14.308 loading class org/apache/spark/sql/catalyst/expressions/InputFileBlockLength done
+Event: 14.310 loading class org/apache/spark/sql/catalyst/expressions/MonotonicallyIncreasingID
+Event: 14.310 loading class org/apache/spark/sql/catalyst/expressions/MonotonicallyIncreasingID done
+Event: 14.311 loading class org/apache/spark/sql/catalyst/expressions/CurrentDatabase
+Event: 14.311 loading class org/apache/spark/sql/catalyst/expressions/CurrentDatabase done
+Event: 14.311 loading class org/apache/spark/sql/catalyst/expressions/CallMethodViaReflection
+Event: 14.311 loading class org/apache/spark/sql/catalyst/expressions/CallMethodViaReflection done
+Event: 14.312 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+08048000-08049000 r-xp 00000000 fc:01 259515                             /usr/lib/jvm/jdk1.8.0_101/bin/java
+08049000-0804a000 rw-p 00000000 fc:01 259515                             /usr/lib/jvm/jdk1.8.0_101/bin/java
+08463000-099ce000 rw-p 00000000 00:00 0                                  [heap]
+9af96000-9b096000 rw-p 00000000 00:00 0 
+9b096000-9b196000 rw-p 00000000 00:00 0 
+9b196000-9d198000 rw-p 00000000 00:00 0 
+9d198000-9d19b000 ---p 00000000 00:00 0 
+9d19b000-9d1e9000 rw-p 00000000 00:00 0 
+9d1e9000-9d1ec000 ---p 00000000 00:00 0 
+9d1ec000-9d33a000 rw-p 00000000 00:00 0 
+9d33a000-9d43a000 rw-p 00000000 00:00 0 
+9d477000-9d47a000 ---p 00000000 00:00 0 
+9d47a000-9d4c8000 rw-p 00000000 00:00 0 
+9d4c8000-9d4cb000 ---p 00000000 00:00 0 
+9d4cb000-9d519000 rw-p 00000000 00:00 0 
+9d519000-9d51c000 ---p 00000000 00:00 0 
+9d51c000-9d56a000 rw-p 00000000 00:00 0 
+9d56a000-9d56d000 ---p 00000000 00:00 0 
+9d56d000-9d6bb000 rw-p 00000000 00:00 0 
+9d6bb000-9e7bc000 rw-p 00000000 00:00 0 
+9e7bc000-9e8bc000 rw-p 00000000 00:00 0 
+9e8bc000-9e8bf000 ---p 00000000 00:00 0 
+9e8bf000-9e90d000 rw-p 00000000 00:00 0 
+9e90d000-9e910000 ---p 00000000 00:00 0 
+9e910000-9e95e000 rw-p 00000000 00:00 0 
+9e95e000-9e961000 ---p 00000000 00:00 0 
+9e961000-9e9af000 rw-p 00000000 00:00 0 
+9e9af000-9e9b2000 ---p 00000000 00:00 0 
+9e9b2000-9ea00000 rw-p 00000000 00:00 0 
+9ea00000-9eac4000 rw-p 00000000 00:00 0 
+9eac4000-9eb00000 ---p 00000000 00:00 0 
+9eb18000-9eb1b000 ---p 00000000 00:00 0 
+9eb1b000-9eb69000 rw-p 00000000 00:00 0 
+9eb69000-9eb6c000 ---p 00000000 00:00 0 
+9eb6c000-9ebba000 rw-p 00000000 00:00 0 
+9ebba000-9ebbd000 ---p 00000000 00:00 0 
+9ebbd000-9ec0b000 rw-p 00000000 00:00 0 
+9ec0b000-9ec0e000 ---p 00000000 00:00 0 
+9ec0e000-9ec5c000 rw-p 00000000 00:00 0 
+9ec5c000-9ec5f000 ---p 00000000 00:00 0 
+9ec5f000-9ecad000 rw-p 00000000 00:00 0 
+9ecad000-9ecb0000 ---p 00000000 00:00 0 
+9ecb0000-9ecfe000 rw-p 00000000 00:00 0 
+9ecfe000-9ed01000 ---p 00000000 00:00 0 
+9ed01000-9ed4f000 rw-p 00000000 00:00 0 
+9ed4f000-9ed52000 ---p 00000000 00:00 0 
+9ed52000-9eda0000 rw-p 00000000 00:00 0 
+9eda0000-9eda3000 ---p 00000000 00:00 0 
+9eda3000-9edf1000 rw-p 00000000 00:00 0 
+9edf1000-9edf4000 ---p 00000000 00:00 0 
+9edf4000-9ee42000 rw-p 00000000 00:00 0 
+9ee42000-9ee45000 ---p 00000000 00:00 0 
+9ee45000-9ee93000 rw-p 00000000 00:00 0 
+9ee93000-9ee96000 ---p 00000000 00:00 0 
+9ee96000-9eee4000 rw-p 00000000 00:00 0 
+9eee4000-9eee7000 ---p 00000000 00:00 0 
+9eee7000-9ef35000 rw-p 00000000 00:00 0 
+9ef35000-9ef38000 ---p 00000000 00:00 0 
+9ef38000-9ef86000 rw-p 00000000 00:00 0 
+9ef86000-9ef89000 ---p 00000000 00:00 0 
+9ef89000-9efd7000 rw-p 00000000 00:00 0 
+9efd7000-9efda000 ---p 00000000 00:00 0 
+9efda000-9f128000 rw-p 00000000 00:00 0 
+9f128000-9f12b000 ---p 00000000 00:00 0 
+9f12b000-9f273000 rw-p 00000000 00:00 0 
+9f273000-9f279000 ---p 00000000 00:00 0 
+9f279000-9f27c000 ---p 00000000 00:00 0 
+9f27c000-9f2ca000 rw-p 00000000 00:00 0 
+9f2ca000-9f2cd000 ---p 00000000 00:00 0 
+9f2cd000-9f31b000 rw-p 00000000 00:00 0 
+9f31b000-9f31e000 ---p 00000000 00:00 0 
+9f31e000-9f36c000 rw-p 00000000 00:00 0 
+9f36c000-9f36f000 ---p 00000000 00:00 0 
+9f36f000-9f3bd000 rw-p 00000000 00:00 0 
+9f3bd000-9f3c0000 ---p 00000000 00:00 0 
+9f3c0000-9f40e000 rw-p 00000000 00:00 0 
+9f40e000-9f411000 ---p 00000000 00:00 0 
+9f411000-9f45f000 rw-p 00000000 00:00 0 
+9f45f000-9f462000 ---p 00000000 00:00 0 
+9f462000-9f4b0000 rw-p 00000000 00:00 0 
+9f4b0000-9f4b3000 ---p 00000000 00:00 0 
+9f4b3000-9f601000 rw-p 00000000 00:00 0 
+9f601000-9f701000 rw-p 00000000 00:00 0 
+9f70d000-9f710000 ---p 00000000 00:00 0 
+9f710000-9f75e000 rw-p 00000000 00:00 0 
+9f75e000-9f761000 ---p 00000000 00:00 0 
+9f761000-9f7af000 rw-p 00000000 00:00 0 
+9f7af000-9f7b2000 ---p 00000000 00:00 0 
+9f7b2000-9f900000 rw-p 00000000 00:00 0 
+9f900000-9f9ad000 rw-p 00000000 00:00 0 
+9f9ad000-9fa00000 ---p 00000000 00:00 0 
+9fa00000-9fb00000 rw-p 00000000 00:00 0 
+9fb00000-9fbfa000 rw-p 00000000 00:00 0 
+9fbfa000-9fc00000 ---p 00000000 00:00 0 
+9fc00000-9fd00000 rw-p 00000000 00:00 0 
+9fd00000-9fdf9000 rw-p 00000000 00:00 0 
+9fdf9000-9fe00000 ---p 00000000 00:00 0 
+9fe00000-9ff00000 rw-p 00000000 00:00 0 
+9ff00000-a0000000 rw-p 00000000 00:00 0 
+a0000000-a00fe000 rw-p 00000000 00:00 0 
+a00fe000-a0100000 ---p 00000000 00:00 0 
+a010c000-a010f000 ---p 00000000 00:00 0 
+a010f000-a015d000 rw-p 00000000 00:00 0 
+a015d000-a0160000 ---p 00000000 00:00 0 
+a0160000-a01ae000 rw-p 00000000 00:00 0 
+a01ae000-a01b1000 ---p 00000000 00:00 0 
+a01b1000-a02ff000 rw-p 00000000 00:00 0 
+a02ff000-a1f00000 rw-p 00000000 00:00 0 
+a1f00000-a2000000 rw-p 00000000 00:00 0 
+a2000000-a2100000 rw-p 00000000 00:00 0 
+a2100000-a2200000 rw-p 00000000 00:00 0 
+a2200000-a2300000 rw-p 00000000 00:00 0 
+a2300000-a23ff000 rw-p 00000000 00:00 0 
+a23ff000-a2400000 ---p 00000000 00:00 0 
+a2427000-a2436000 r-xp 00000000 fc:01 259768                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libnio.so
+a2436000-a2437000 rw-p 0000e000 fc:01 259768                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libnio.so
+a2437000-a243a000 ---p 00000000 00:00 0 
+a243a000-a2488000 rw-p 00000000 00:00 0 
+a2488000-a248b000 ---p 00000000 00:00 0 
+a248b000-a24a1000 rw-p 00000000 00:00 0 
+a24a1000-a24d7000 r--s 0031c000 fc:01 775204                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-common-2.7.3.jar
+a24d7000-a2500000 r--s 001ee000 fc:01 775202                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/guava-14.0.1.jar
+a2500000-a25ff000 rw-p 00000000 00:00 0 
+a25ff000-a2600000 ---p 00000000 00:00 0 
+a2604000-a2605000 r-xp 00000000 fc:01 259750                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libjaas_unix.so
+a2605000-a2606000 rw-p 00000000 fc:01 259750                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libjaas_unix.so
+a2606000-a260e000 r-xp 00000000 fc:01 259753                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libmanagement.so
+a260e000-a260f000 rw-p 00007000 fc:01 259753                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libmanagement.so
+a260f000-a2624000 r-xp 00000000 fc:01 259812                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libnet.so
+a2624000-a2625000 rw-p 00015000 fc:01 259812                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libnet.so
+a2625000-a2688000 r--s 004de000 fc:01 775200                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hive-metastore-1.2.1.spark2.jar
+a2688000-a26f3000 r--s 0093d000 fc:01 775198                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spire_2.11-0.13.0.jar
+a26f3000-a2800000 r--s 00dd7000 fc:01 775194                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/scala-compiler-2.11.12.jar
+a2800000-a28ff000 rw-p 00000000 00:00 0 
+a28ff000-a2900000 ---p 00000000 00:00 0 
+a2900000-a2904000 r--s 00097000 fc:01 259865                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/jsse.jar
+a2904000-a2906000 r--s 00015000 fc:01 775210                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-auth-2.7.3.jar
+a2906000-a2911000 r--s 000b9000 fc:01 775209                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/janino-3.0.9.jar
+a2911000-a2913000 r--s 00010000 fc:01 775208                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-media-jaxb-2.22.2.jar
+a2913000-a2915000 r--s 00008000 fc:01 775207                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-compiler-3.0.9.jar
+a2915000-a291a000 r--s 00041000 fc:01 775206                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/xbean-asm6-shaded-4.8.jar
+a291a000-a291b000 r--s 00004000 fc:01 775205                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/eigenbase-properties-1.1.5.jar
+a291b000-a291d000 r--s 0000e000 fc:01 775203                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/guice-servlet-3.0.jar
+a291d000-a291e000 r--s 00000000 fc:01 775201                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/kubernetes-model-common-4.6.1.jar
+a291e000-a2922000 r--s 00020000 fc:01 775199                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-digester-1.8.jar
+a2922000-a2926000 r--s 0001a000 fc:01 775197                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hk2-utils-2.4.0-b34.jar
+a2926000-a2927000 r--s 00009000 fc:01 775196                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hive-cli-1.2.1.spark2.jar
+a2927000-a2956000 r--s 002e5000 fc:01 775195                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/derby-10.12.1.1.jar
+a2956000-a297b000 rw-p 00000000 00:00 0 
+a297b000-a297e000 r--s 00014000 fc:01 775193                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/json4s-ast_2.11-3.5.3.jar
+a297e000-a2980000 r--s 00003000 fc:01 775192                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jcl-over-slf4j-1.7.16.jar
+a2980000-a2982000 r--s 0000b000 fc:01 775191                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-unsafe_2.11-2.4.5.jar
+a2982000-a2990000 r--s 00089000 fc:01 775190                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/json4s-scalap_2.11-3.5.3.jar
+a2990000-a2994000 r--s 00029000 fc:01 775189                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hk2-locator-2.4.0-b34.jar
+a2994000-a2997000 r--s 00014000 fc:01 775188                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/super-csv-2.2.0.jar
+a2997000-a2999000 r--s 00004000 fc:01 775187                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/stax-api-1.0-2.jar
+a2999000-a299a000 r--s 00009000 fc:01 775186                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/slf4j-api-1.7.16.jar
+a299a000-a29a7000 r--s 0009c000 fc:01 775185                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/json4s-core_2.11-3.5.3.jar
+a29a7000-a29b9000 r--s 00097000 fc:01 775184                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/apacheds-kerberos-codec-2.0.0-M15.jar
+a29b9000-a29bd000 r--s 0004c000 fc:01 775183                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/RoaringBitmap-0.7.45.jar
+a29bd000-a29c4000 r--s 00046000 fc:01 775181                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/libfb303-0.9.3.jar
+a29c4000-a29e7000 rw-p 00000000 00:00 0 
+a29e7000-a2abf000 r--s 00d92000 fc:01 775177                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/breeze_2.11-0.13.2.jar
+a2abf000-a2b00000 r--s 006c0000 fc:01 775169                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/mesos-1.4.0-shaded-protobuf.jar
+a2b00000-a2bfd000 rw-p 00000000 00:00 0 
+a2bfd000-a2c00000 ---p 00000000 00:00 0 
+a2c00000-a2c08000 r--s 0005d000 fc:01 775180                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/kryo-shaded-4.0.2.jar
+a2c08000-a2c29000 r--s 0015c000 fc:01 775176                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/avro-1.8.2.jar
+a2c29000-a2c32000 r--s 00046000 fc:01 775175                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-dataformat-yaml-2.6.7.jar
+a2c32000-a2c3a000 r--s 0003b000 fc:01 775174                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/curator-recipes-2.7.1.jar
+a2c3a000-a2d00000 r--s 008ab000 fc:01 775156                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-sql_2.11-2.4.5.jar
+a2d00000-a2dfe000 rw-p 00000000 00:00 0 
+a2dfe000-a2e00000 ---p 00000000 00:00 0 
+a2e00000-a2e02000 r--s 0000d000 fc:01 775182                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/chill-java-0.9.3.jar
+a2e02000-a2e04000 r--s 0001c000 fc:01 775179                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/py4j-0.10.7.jar
+a2e04000-a2e06000 r--s 00027000 fc:01 775178                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/core-1.1.2.jar
+a2e06000-a2e0e000 r--s 0005b000 fc:01 775173                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/univocity-parsers-2.7.3.jar
+a2e0e000-a2e1a000 r--s 000b6000 fc:01 775172                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/zookeeper-3.4.6.jar
+a2e1a000-a2e1c000 r--s 00012000 fc:01 775171                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/api-util-1.0.0-M20.jar
+a2e1c000-a2e35000 r--s 00150000 fc:01 775170                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/htrace-core-3.1.0-incubating.jar
+a2e35000-a2e37000 r--s 00009000 fc:01 775168                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-cli-1.2.jar
+a2e37000-a2e7d000 r--s 0039f000 fc:01 775167                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/netty-all-4.1.42.Final.jar
+a2e7d000-a2e7e000 r--s 00000000 fc:01 775166                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javax.inject-1.jar
+a2e7e000-a2e83000 r--s 00041000 fc:01 775165                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-lang-2.6.jar
+a2e83000-a2e8a000 r--s 00049000 fc:01 775164                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/httpcore-4.4.10.jar
+a2e8a000-a2e8c000 r--s 00003000 fc:01 775163                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-container-servlet-2.22.2.jar
+a2e8c000-a2ea4000 r--s 00115000 fc:01 775162                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/xercesImpl-2.9.1.jar
+a2ea4000-a2ea6000 r--s 00010000 fc:01 775161                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-mapreduce-client-shuffle-2.7.3.jar
+a2ea6000-a2eb3000 r--s 000a0000 fc:01 775160                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-graphx_2.11-2.4.5.jar
+a2eb3000-a2eb9000 r--s 0003c000 fc:01 775159                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/snakeyaml-1.15.jar
+a2eb9000-a2eba000 r--s 00003000 fc:01 775158                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/generex-1.0.2.jar
+a2eba000-a2ebc000 r--s 00005000 fc:01 775157                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javax.annotation-api-1.2.jar
+a2ebc000-a2ec2000 r--s 00028000 fc:01 775155                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/curator-framework-2.7.1.jar
+a2ec2000-a2ec8000 r--s 00063000 fc:01 775153                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jodd-core-3.5.2.jar
+a2ec8000-a2ecf000 r--s 0003f000 fc:01 775152                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-codec-1.10.jar
+a2ecf000-a2ed1000 r--s 0000e000 fc:01 775151                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/oro-2.0.8.jar
+a2ed1000-a2ed5000 r--s 0001e000 fc:01 775150                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-repl_2.11-2.4.5.jar
+a2ed5000-a2ef2000 r--s 001d5000 fc:01 775146                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-yarn-api-2.7.3.jar
+a2ef2000-a2f00000 r--s 0009d000 fc:01 775145                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-common-2.22.2.jar
+a2f00000-a2ffa000 rw-p 00000000 00:00 0 
+a2ffa000-a3000000 ---p 00000000 00:00 0 
+a3000000-a3001000 r--s 00008000 fc:01 775154                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/machinist_2.11-0.6.1.jar
+a3001000-a3004000 r--s 00006000 fc:01 775149                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jsr305-1.3.9.jar
+a3004000-a3007000 r--s 00015000 fc:01 775148                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javax.servlet-api-3.1.0.jar
+a3007000-a3009000 r--s 0000f000 fc:01 775147                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/curator-client-2.7.1.jar
+a3009000-a3020000 r--s 00183000 fc:01 775144                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-yarn-common-2.7.3.jar
+a3020000-a3022000 r--s 00000000 fc:01 775143                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jul-to-slf4j-1.7.16.jar
+a3022000-a302a000 r--s 00066000 fc:01 775142                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/apache-log4j-extras-1.2.17.jar
+a302a000-a302c000 r--s 00007000 fc:01 775141                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/zjsonpatch-0.3.0.jar
+a302c000-a3030000 r--s 00015000 fc:01 775140                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/xz-1.5.jar
+a3030000-a3032000 r--s 00014000 fc:01 775139                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/okio-1.15.0.jar
+a3032000-a3035000 r--s 00026000 fc:01 775138                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-yarn-client-2.7.3.jar
+a3035000-a303f000 r--s 000a5000 fc:01 775137                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javassist-3.18.1-GA.jar
+a303f000-a3044000 r--s 00027000 fc:01 775136                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/automaton-1.11-8.jar
+a3044000-a3048000 r--s 0002a000 fc:01 775135                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/avro-mapred-1.8.2-hadoop2.jar
+a3048000-a3049000 r--s 00001000 fc:01 775134                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javax.inject-2.4.0-b34.jar
+a3049000-a306d000 r--s 001cd000 fc:01 775133                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-math3-3.4.1.jar
+a306d000-a3071000 r--s 00036000 fc:01 775132                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/ST4-4.0.4.jar
+a3071000-a3072000 r--s 00009000 fc:01 775131                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-annotations-2.7.3.jar
+a3072000-a307f000 r--s 00083000 fc:01 775130                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-collections-3.2.2.jar
+a307f000-a3098000 r--s 00164000 fc:01 775129                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-mapreduce-client-core-2.7.3.jar
+a3098000-a30cf000 r--s 00325000 fc:01 775128                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/calcite-core-1.2.0-incubating.jar
+a30cf000-a30d7000 r--s 0006e000 fc:01 775126                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-lang3-3.5.jar
+a30d7000-a30da000 r--s 00017000 fc:01 775125                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jaxb-api-2.2.2.jar
+a30da000-a30dd000 r--s 0000b000 fc:01 775124                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/objenesis-2.5.1.jar
+a30dd000-a30e3000 r--s 0002c000 fc:01 775123                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jdo-api-3.0.1.jar
+a30e3000-a30e7000 r--s 0002a000 fc:01 775122                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/breeze-macros_2.11-0.13.2.jar
+a30e7000-a310a000 rw-p 00000000 00:00 0 
+a310a000-a3200000 r--s 00bf8000 fc:01 775115                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-core_2.11-2.4.5.jar
+a3200000-a3300000 rw-p 00000000 00:00 0 
+a3300000-a3301000 r--s 00003000 fc:01 775127                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/metrics-json-3.1.5.jar
+a3301000-a3302000 r--s 00003000 fc:01 775121                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-tags_2.11-2.4.5.jar
+a3302000-a3305000 r--s 001eb000 fc:01 775120                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/snappy-java-1.1.7.3.jar
+a3305000-a330c000 r--s 00039000 fc:01 775119                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/calcite-avatica-1.2.0-incubating.jar
+a330c000-a330d000 r--s 00002000 fc:01 775118                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jpam-1.1.jar
+a330d000-a331a000 r--s 00071000 fc:01 775117                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-module-scala_2.11-2.6.7.1.jar
+a331a000-a331c000 r--s 00011000 fc:01 775116                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-launcher_2.11-2.4.5.jar
+a331c000-a3335000 r--s 0012c000 fc:01 775114                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/netty-3.9.9.Final.jar
+a3335000-a333a000 r--s 0002a000 fc:01 775113                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/gson-2.2.4.jar
+a333a000-a334a000 r--s 00133000 fc:01 775112                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/arrow-vector-0.10.0.jar
+a334a000-a33a3000 r--s 00523000 fc:01 775111                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/scala-library-2.11.12.jar
+a33a3000-a33a5000 r--s 00003000 fc:01 775110                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/api-asn1-api-1.0.0-M20.jar
+a33a5000-a33ab000 r--s 00043000 fc:01 775109                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-configuration-1.6.jar
+a33ab000-a33ad000 r--s 00238000 fc:01 775108                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/zstd-jni-1.3.2-2.jar
+a33ad000-a33af000 r--s 0000e000 fc:01 775107                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-logging-1.1.3.jar
+a33af000-a33b3000 r--s 0001a000 fc:01 775106                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/metrics-core-3.1.5.jar
+a33b3000-a33b5000 r--s 00012000 fc:01 775105                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/compress-lzf-1.0.3.jar
+a33b5000-a33b6000 r--s 0000b000 fc:01 775104                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/snappy-0.2.jar
+a33b6000-a33ce000 r--s 000d6000 fc:01 775103                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-guava-2.22.2.jar
+a33ce000-a33d3000 r--s 0003e000 fc:01 775102                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-net-3.1.jar
+a33d3000-a33d4000 r--s 00006000 fc:01 775101                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-client-2.7.3.jar
+a33d4000-a33d6000 r--s 0000b000 fc:01 775100                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/arrow-format-0.10.0.jar
+a33d6000-a33d8000 r--s 00001000 fc:01 775099                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-tags_2.11-2.4.5-tests.jar
+a33d8000-a3443000 r--s 00784000 fc:01 775092                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-hdfs-2.7.3.jar
+a3443000-a3500000 r--s 0090a000 fc:01 775086                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-catalyst_2.11-2.4.5.jar
+a3500000-a35f9000 rw-p 00000000 00:00 0 
+a35f9000-a3600000 ---p 00000000 00:00 0 
+a3600000-a3604000 r--s 00019000 fc:01 775098                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javax.ws.rs-api-2.0.1.jar
+a3604000-a3606000 r--s 00014000 fc:01 775097                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spire-macros_2.11-0.13.0.jar
+a3606000-a3608000 r--s 0001f000 fc:01 775096                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-crypto-1.0.0.jar
+a3608000-a360b000 r--s 0001e000 fc:01 775095                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/aircompressor-0.10.jar
+a360b000-a3618000 r--s 000b1000 fc:01 775094                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-mapreduce-client-common-2.7.3.jar
+a3618000-a361d000 r--s 0004e000 fc:01 775093                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/datanucleus-api-jdo-3.2.6.jar
+a361d000-a361e000 r--s 0000a000 fc:01 775091                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/apacheds-i18n-2.0.0-M15.jar
+a361e000-a3623000 r--s 00027000 fc:01 775090                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hk2-api-2.4.0-b34.jar
+a3623000-a363c000 r--s 000f4000 fc:01 775089                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-column-1.10.1.jar
+a363c000-a3640000 r--s 00014000 fc:01 775088                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-common-1.10.1.jar
+a3640000-a3674000 r--s 00277000 fc:01 775087                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-hadoop-bundle-1.6.0.jar
+a3674000-a36a3000 r--s 0021a000 fc:01 775084                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-network-common_2.11-2.4.5.jar
+a36a3000-a36a6000 r--s 0001e000 fc:01 775083                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/avro-ipc-1.8.2.jar
+a36a6000-a36ad000 r--s 00053000 fc:01 775082                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-compress-1.8.1.jar
+a36ad000-a36b0000 r--s 00025000 fc:01 775081                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-dbcp-1.4.jar
+a36b0000-a36bd000 r--s 0009b000 fc:01 775080                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/kubernetes-client-4.6.1.jar
+a36bd000-a36de000 r--s 00177000 fc:01 775079                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hppc-0.7.2.jar
+a36de000-a36ef000 r--s 0010c000 fc:01 775078                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-databind-2.6.7.3.jar
+a36ef000-a3700000 r--s 00097000 fc:01 775076                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-mesos_2.11-2.4.5.jar
+a3700000-a37fd000 rw-p 00000000 00:00 0 
+a37fd000-a3800000 ---p 00000000 00:00 0 
+a3800000-a3802000 r--s 0000e000 fc:01 775085                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-mapreduce-client-jobclient-2.7.3.jar
+a3802000-a3806000 r--s 00028000 fc:01 775077                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jetty-util-6.1.26.jar
+a3806000-a380b000 r--s 00038000 fc:01 775075                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-beanutils-1.9.4.jar
+a380b000-a381f000 r--s 000ec000 fc:01 775074                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-jackson-1.10.1.jar
+a381f000-a3822000 r--s 00022000 fc:01 775073                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/stringtemplate-3.2.1.jar
+a3822000-a382c000 r--s 0007b000 fc:01 775072                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-mapreduce-client-app-2.7.3.jar
+a382c000-a382e000 r--s 00003000 fc:01 775071                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/JavaEWAH-0.3.2.jar
+a382e000-a383c000 r--s 000a3000 fc:01 775070                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-format-2.4.0.jar
+a383c000-a383f000 r--s 00016000 fc:01 775069                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jsp-api-2.1.jar
+a383f000-a3841000 r--s 0000f000 fc:01 775068                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/activation-1.1.1.jar
+a3841000-a3848000 r--s 00058000 fc:01 775067                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-yarn-server-common-2.7.3.jar
+a3848000-a3849000 r--s 00007000 fc:01 775066                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-module-jaxb-annotations-2.6.7.jar
+a3849000-a3878000 r--s 001e4000 fc:01 775065                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-streaming_2.11-2.4.5.jar
+a3878000-a3893000 r--s 0012e000 fc:01 775064                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-hive_2.11-2.4.5.jar
+a3893000-a389e000 r--s 000c5000 fc:01 775063                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-encoding-1.10.1.jar
+a389e000-a38ab000 r--s 000af000 fc:01 775062                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/httpclient-4.5.6.jar
+a38ab000-a38ae000 r--s 00009000 fc:01 775061                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-annotations-2.6.7.jar
+a38ae000-a38b0000 r--s 00012000 fc:01 775060                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/arrow-memory-0.10.0.jar
+a38b0000-a38c6000 r--s 00124000 fc:01 775059                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/ivy-2.4.0.jar
+a38c6000-a38c8000 r--s 00020000 fc:01 775058                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hive-beeline-1.2.1.spark2.jar
+a38c8000-a38cc000 r--s 00025000 fc:01 775057                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-client-2.22.2.jar
+a38cc000-a38ce000 r--s 00017000 fc:01 775055                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hive-jdbc-1.2.1.spark2.jar
+a38ce000-a38d0000 r--s 00008000 fc:01 775054                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/metrics-jvm-3.1.5.jar
+a38d0000-a38db000 r--s 000b0000 fc:01 775050                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jtransforms-2.4.0.jar
+a38db000-a38f1000 r--s 000d3000 fc:01 775047                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-server-2.22.2.jar
+a38f1000-a3900000 r--s 0009f000 fc:01 775046                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/guice-3.0.jar
+a3900000-a3a00000 rw-p 00000000 00:00 0 
+a3a00000-a3a01000 r--s 00001000 fc:01 775056                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/minlog-1.3.0.jar
+a3a01000-a3a03000 r--s 00004000 fc:01 775053                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/metrics-graphite-3.1.5.jar
+a3a03000-a3a04000 r--s 00004000 fc:01 775052                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/osgi-resource-locator-1.0.1.jar
+a3a04000-a3a07000 r--s 00015000 fc:01 775051                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-pool-1.5.4.jar
+a3a07000-a3a0a000 r--s 00058000 fc:01 775049                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/lz4-java-1.4.0.jar
+a3a0a000-a3a57000 r--s 0041c000 fc:01 775042                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/scala-reflect-2.11.12.jar
+a3a57000-a3b00000 r--s 00a4f000 fc:01 775030                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hive-exec-1.2.1.spark2.jar
+a3b00000-a3bfa000 rw-p 00000000 00:00 0 
+a3bfa000-a3c00000 ---p 00000000 00:00 0 
+a3c00000-a3c01000 r--s 00002000 fc:01 775048                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/flatbuffers-1.2.0-3f79e055.jar
+a3c01000-a3c09000 r--s 00059000 fc:01 775045                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/javolution-5.5.1.jar
+a3c09000-a3c0c000 r--s 0000f000 fc:01 775044                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-network-shuffle_2.11-2.4.5.jar
+a3c0c000-a3c12000 r--s 00034000 fc:01 775043                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/libthrift-0.9.3.jar
+a3c12000-a3c16000 r--s 0003e000 fc:01 775041                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jline-2.14.6.jar
+a3c16000-a3d00000 r--s 009a3000 fc:01 775025                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/kubernetes-model-4.6.1.jar
+a3d00000-a3dfd000 rw-p 00000000 00:00 0 
+a3dfd000-a3e00000 ---p 00000000 00:00 0 
+a3e00000-a3e06000 r--s 00045000 fc:01 775040                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-httpclient-3.1.jar
+a3e06000-a3e08000 r--s 00007000 fc:01 775039                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/paranamer-2.8.jar
+a3e08000-a3e0f000 r--s 0007d000 fc:01 775038                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jetty-6.1.26.jar
+a3e0f000-a3e15000 r--s 00062000 fc:01 775037                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/okhttp-3.12.0.jar
+a3e15000-a3e16000 r--s 00002000 fc:01 775036                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/slf4j-log4j12-1.7.16.jar
+a3e16000-a3e20000 r--s 0009a000 fc:01 775035                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/scala-xml_2.11-1.0.5.jar
+a3e20000-a3e2f000 r--s 00096000 fc:01 775034                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-yarn_2.11-2.4.5.jar
+a3e2f000-a3e31000 r--s 00005000 fc:01 775033                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/stax-api-1.0.1.jar
+a3e31000-a3e32000 r--s 00003000 fc:01 775032                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/xmlenc-0.52.jar
+a3e32000-a3e43000 r--s 00089000 fc:01 775031                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/joda-time-2.9.3.jar
+a3e43000-a3e48000 r--s 00035000 fc:01 775029                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/chill_2.11-0.9.3.jar
+a3e48000-a3e5c000 r--s 0016b000 fc:01 775028                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/orc-core-1.5.5-nohive.jar
+a3e5c000-a3e72000 r--s 001a4000 fc:01 775027                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/datanucleus-rdbms-3.2.9.jar
+a3e72000-a3e76000 r--s 0002a000 fc:01 775026                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/commons-io-2.4.jar
+a3e76000-a3e83000 r--s 00077000 fc:01 775024                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-kubernetes_2.11-2.4.5.jar
+a3e83000-a3e84000 r--s 00003000 fc:01 775023                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jta-1.1.jar
+a3e84000-a3e8a000 r--s 0004c000 fc:01 775022                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/antlr4-runtime-4.7.jar
+a3e8a000-a3e8d000 r--s 000fd000 fc:01 775021                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/leveldbjni-all-1.8.jar
+a3e8d000-a3e90000 r--s 00028000 fc:01 775020                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/stream-2.7.0.jar
+a3e90000-a3e92000 r--s 00002000 fc:01 775019                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/aopalliance-repackaged-2.4.0-b34.jar
+a3e92000-a3e93000 r--s 00004000 fc:01 775018                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/opencsv-2.3.jar
+a3e93000-a3e94000 r--s 00000000 fc:01 775017                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/shims-0.7.45.jar
+a3e94000-a3e98000 r--s 00025000 fc:01 775016                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/antlr-runtime-3.4.jar
+a3e98000-a3e99000 r--s 00006000 fc:01 775015                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-xc-1.9.13.jar
+a3e99000-a3e9e000 r--s 00068000 fc:01 775014                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/antlr-2.7.7.jar
+a3e9e000-a3ea2000 r--s 0003c000 fc:01 775013                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-core-2.6.7.jar
+a3ea2000-a3ea4000 r--s 0000c000 fc:01 775012                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-kvstore_2.11-2.4.5.jar
+a3ea4000-a3ea7000 r--s 0000e000 fc:01 775010                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jersey-container-servlet-core-2.22.2.jar
+a3ea7000-a3ebf000 r--s 001b6000 fc:01 775008                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/datanucleus-core-3.2.10.jar
+a3ebf000-a3ec8000 r--s 0006f000 fc:01 775007                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/log4j-1.2.17.jar
+a3ec8000-a3ed3000 r--s 000bc000 fc:01 775006                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/orc-mapreduce-1.5.5-nohive.jar
+a3ed3000-a3ef4000 r--s 0019b000 fc:01 775003                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-hive-thriftserver_2.11-2.4.5.jar
+a3ef4000-a3f3a000 r--s 00317000 fc:01 774993                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/shapeless_2.11-2.3.2.jar
+a3f3a000-a3fcd000 r--s 00716000 fc:01 774986                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-mllib_2.11-2.4.5.jar
+a3fcd000-a3fce000 ---p 00000000 00:00 0 
+a3fce000-a404e000 rw-p 00000000 00:00 0 
+a404e000-a4051000 ---p 00000000 00:00 0 
+a4051000-a409f000 rw-p 00000000 00:00 0 
+a409f000-a40a0000 ---p 00000000 00:00 0 
+a40a0000-a40a3000 ---p 00000000 00:00 0 
+a40a3000-a4120000 rw-p 00000000 00:00 0 
+a4120000-a4121000 ---p 00000000 00:00 0 
+a4121000-a4124000 ---p 00000000 00:00 0 
+a4124000-a41a1000 rw-p 00000000 00:00 0 
+a41a1000-a41a4000 ---p 00000000 00:00 0 
+a41a4000-a41f2000 rw-p 00000000 00:00 0 
+a41f2000-a4365000 r--p 00000000 fc:01 7803                               /usr/lib/locale/C.UTF-8/LC_COLLATE
+a4365000-a4500000 r--p 00000000 fc:01 7798                               /usr/lib/locale/locale-archive
+a4500000-a45f9000 rw-p 00000000 00:00 0 
+a45f9000-a4600000 ---p 00000000 00:00 0 
+a4600000-a4608000 r--s 0007b000 fc:01 775001                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/protobuf-java-2.5.0.jar
+a4608000-a4639000 r--p 00000000 fc:01 7804                               /usr/lib/locale/C.UTF-8/LC_CTYPE
+a4639000-a463c000 ---p 00000000 00:00 0 
+a463c000-a468a000 rw-p 00000000 00:00 0 
+a468a000-a468d000 ---p 00000000 00:00 0 
+a468d000-a46db000 rw-p 00000000 00:00 0 
+a46db000-a48b4000 r--s 03d29000 fc:01 259861                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/rt.jar
+a48b4000-a4cfa000 rw-p 00000000 00:00 0 
+a4cfa000-a4d00000 ---p 00000000 00:00 0 
+a4d00000-a7100000 rw-p 00000000 00:00 0 
+a7100000-a7200000 rw-p 00000000 00:00 0 
+a7200000-a7204000 r--s 0000c000 fc:01 775009                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/validation-api-1.1.0.Final.jar
+a7204000-a7207000 r--s 00015000 fc:01 775005                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/pyrolite-4.13.jar
+a7207000-a7212000 r--s 00062000 fc:01 774999                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/calcite-linq4j-1.2.0-incubating.jar
+a7212000-a7224000 r--s 00112000 fc:01 774998                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/arpack_combined_all-0.1.jar
+a7224000-a7230000 r--s 00068000 fc:01 774996                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/scala-parser-combinators_2.11-1.1.0.jar
+a7230000-a7231000 ---p 00000000 00:00 0 
+a7231000-a7300000 rw-p 00000000 00:00 0 
+a7300000-a7385000 rw-p 00000000 00:00 0 
+a7385000-a7400000 ---p 00000000 00:00 0 
+a7400000-a7402000 r--s 0000a000 fc:01 775011                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/json4s-jackson_2.11-3.5.3.jar
+a7402000-a7404000 r--s 0000d000 fc:01 775004                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-yarn-server-web-proxy-2.7.3.jar
+a7404000-a7406000 r--s 00009000 fc:01 775002                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-module-paranamer-2.7.9.jar
+a7406000-a740a000 r--s 00029000 fc:01 775000                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-mllib-local_2.11-2.4.5.jar
+a740a000-a740b000 r--s 00000000 fc:01 774997                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/macro-compat_2.11-1.1.1.jar
+a740b000-a740d000 r--s 00002000 fc:01 774995                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/logging-interceptor-3.12.0.jar
+a740d000-a741b000 r--s 000b1000 fc:01 774994                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-mapper-asl-1.9.13.jar
+a741b000-a741c000 r--s 00004000 fc:01 774992                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-jaxrs-1.9.13.jar
+a741c000-a741f000 r--s 00019000 fc:01 774990                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/bonecp-0.8.0.RELEASE.jar
+a741f000-a7424000 r--s 00041000 fc:01 774988                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-hadoop-1.10.1.jar
+a7424000-a7428000 r--s 00035000 fc:01 774987                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-core-asl-1.9.13.jar
+a7428000-a7429000 ---p 00000000 00:00 0 
+a7429000-a74c7000 rw-p 00000000 00:00 0 
+a74c7000-a75ff000 ---p 00000000 00:00 0 
+a75ff000-a761d000 rw-p 00000000 00:00 0 
+a761d000-a7754000 ---p 00000000 00:00 0 
+a7754000-a7776000 rw-p 00000000 00:00 0 
+a7776000-a77ff000 ---p 00000000 00:00 0 
+a77ff000-ab340000 rw-p 00000000 00:00 0 
+ab340000-d22c0000 ---p 00000000 00:00 0 
+d22c0000-d65c0000 rw-p 00000000 00:00 0 
+d7e6d000-d80c0000 rw-p 00000000 00:00 0 
+d80c0000-e7800000 ---p 00000000 00:00 0 
+e7800000-e7801000 r--s 00006000 fc:01 774991                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/orc-shims-1.5.5.jar
+e7801000-e7803000 r--s 00006000 fc:01 774989                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-sketch_2.11-2.4.5.jar
+e7803000-e7876000 rw-p 00000000 00:00 0 
+e7876000-e7877000 ---p 00000000 00:00 0 
+e7877000-e7909000 rw-p 00000000 00:00 0 
+e7909000-e7cb7000 ---p 00000000 00:00 0 
+e7cb7000-e8117000 rwxp 00000000 00:00 0 
+e8117000-f6cb7000 ---p 00000000 00:00 0 
+f6cb7000-f6cd0000 r-xp 00000000 fc:01 259814                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libzip.so
+f6cd0000-f6cd1000 rw-p 00019000 fc:01 259814                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libzip.so
+f6cd1000-f6cdd000 r-xp 00000000 fc:01 1032207                            /lib32/libnss_files-2.27.so
+f6cdd000-f6cde000 r--p 0000b000 fc:01 1032207                            /lib32/libnss_files-2.27.so
+f6cde000-f6cdf000 rw-p 0000c000 fc:01 1032207                            /lib32/libnss_files-2.27.so
+f6cdf000-f6ce5000 rw-p 00000000 00:00 0 
+f6ce5000-f6cfb000 r-xp 00000000 fc:01 1032204                            /lib32/libnsl-2.27.so
+f6cfb000-f6cfc000 ---p 00016000 fc:01 1032204                            /lib32/libnsl-2.27.so
+f6cfc000-f6cfd000 r--p 00016000 fc:01 1032204                            /lib32/libnsl-2.27.so
+f6cfd000-f6cfe000 rw-p 00017000 fc:01 1032204                            /lib32/libnsl-2.27.so
+f6cfe000-f6d00000 rw-p 00000000 00:00 0 
+f6d00000-f6df4000 rw-p 00000000 00:00 0 
+f6df4000-f6e00000 ---p 00000000 00:00 0 
+f6e00000-f6e02000 r--s 00000000 fc:01 774985                             /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/aopalliance-1.0.jar
+f6e02000-f6e03000 r--p 00000000 fc:01 7809                               /usr/lib/locale/C.UTF-8/LC_NUMERIC
+f6e03000-f6e04000 r--p 00000000 fc:01 7812                               /usr/lib/locale/C.UTF-8/LC_TIME
+f6e04000-f6e05000 r--p 00000000 fc:01 7807                               /usr/lib/locale/C.UTF-8/LC_MONETARY
+f6e05000-f6e06000 r--p 00000000 fc:01 7801                               /usr/lib/locale/C.UTF-8/LC_MESSAGES/SYS_LC_MESSAGES
+f6e06000-f6e07000 r--p 00000000 fc:01 7810                               /usr/lib/locale/C.UTF-8/LC_PAPER
+f6e07000-f6e0f000 rw-s 00000000 fc:01 269380                             /tmp/hsperfdata_ubuntu/17804
+f6e0f000-f6e1b000 r-xp 00000000 fc:01 1032209                            /lib32/libnss_nis-2.27.so
+f6e1b000-f6e1c000 r--p 0000b000 fc:01 1032209                            /lib32/libnss_nis-2.27.so
+f6e1c000-f6e1d000 rw-p 0000c000 fc:01 1032209                            /lib32/libnss_nis-2.27.so
+f6e1d000-f6e25000 r-xp 00000000 fc:01 1032205                            /lib32/libnss_compat-2.27.so
+f6e25000-f6e26000 r--p 00007000 fc:01 1032205                            /lib32/libnss_compat-2.27.so
+f6e26000-f6e27000 rw-p 00008000 fc:01 1032205                            /lib32/libnss_compat-2.27.so
+f6e27000-f6e2e000 r--s 00000000 fc:01 269669                             /usr/lib32/gconv/gconv-modules.cache
+f6e2e000-f6e52000 r-xp 00000000 fc:01 259809                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libjava.so
+f6e52000-f6e53000 rw-p 00023000 fc:01 259809                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libjava.so
+f6e53000-f6e5e000 r-xp 00000000 fc:01 259760                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libverify.so
+f6e5e000-f6e5f000 rw-p 0000b000 fc:01 259760                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/libverify.so
+f6e5f000-f6e67000 r-xp 00000000 fc:01 1032214                            /lib32/librt-2.27.so
+f6e67000-f6e68000 r--p 00007000 fc:01 1032214                            /lib32/librt-2.27.so
+f6e68000-f6e69000 rw-p 00008000 fc:01 1032214                            /lib32/librt-2.27.so
+f6e69000-f6e6a000 ---p 00000000 00:00 0 
+f6e6a000-f6e6d000 ---p 00000000 00:00 0 
+f6e6d000-f6eba000 rw-p 00000000 00:00 0 
+f6eba000-f6f83000 r-xp 00000000 fc:01 1032202                            /lib32/libm-2.27.so
+f6f83000-f6f84000 r--p 000c8000 fc:01 1032202                            /lib32/libm-2.27.so
+f6f84000-f6f85000 rw-p 000c9000 fc:01 1032202                            /lib32/libm-2.27.so
+f6f85000-f790e000 r-xp 00000000 fc:01 259794                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/server/libjvm.so
+f790e000-f797b000 rw-p 00989000 fc:01 259794                             /usr/lib/jvm/jdk1.8.0_101/jre/lib/i386/server/libjvm.so
+f797b000-f7da5000 rw-p 00000000 00:00 0 
+f7da5000-f7f77000 r-xp 00000000 fc:01 1032198                            /lib32/libc-2.27.so
+f7f77000-f7f78000 ---p 001d2000 fc:01 1032198                            /lib32/libc-2.27.so
+f7f78000-f7f7a000 r--p 001d2000 fc:01 1032198                            /lib32/libc-2.27.so
+f7f7a000-f7f7b000 rw-p 001d4000 fc:01 1032198                            /lib32/libc-2.27.so
+f7f7b000-f7f7e000 rw-p 00000000 00:00 0 
+f7f7e000-f7f81000 r-xp 00000000 fc:01 1032201                            /lib32/libdl-2.27.so
+f7f81000-f7f82000 r--p 00002000 fc:01 1032201                            /lib32/libdl-2.27.so
+f7f82000-f7f83000 rw-p 00003000 fc:01 1032201                            /lib32/libdl-2.27.so
+f7f83000-f7f97000 r-xp 00000000 fc:01 258198                             /usr/lib/jvm/jdk1.8.0_101/lib/i386/jli/libjli.so
+f7f97000-f7f98000 rw-p 00014000 fc:01 258198                             /usr/lib/jvm/jdk1.8.0_101/lib/i386/jli/libjli.so
+f7f98000-f7fb3000 r-xp 00000000 fc:01 1032212                            /lib32/libpthread-2.27.so
+f7fb3000-f7fb4000 r--p 0001a000 fc:01 1032212                            /lib32/libpthread-2.27.so
+f7fb4000-f7fb5000 rw-p 0001b000 fc:01 1032212                            /lib32/libpthread-2.27.so
+f7fb5000-f7fb7000 rw-p 00000000 00:00 0 
+f7fb7000-f7fb8000 r--p 00000000 fc:01 7808                               /usr/lib/locale/C.UTF-8/LC_NAME
+f7fb8000-f7fb9000 r--p 00000000 fc:01 7802                               /usr/lib/locale/C.UTF-8/LC_ADDRESS
+f7fb9000-f7fba000 r--p 00000000 fc:01 7811                               /usr/lib/locale/C.UTF-8/LC_TELEPHONE
+f7fba000-f7fbb000 r--p 00000000 fc:01 7806                               /usr/lib/locale/C.UTF-8/LC_MEASUREMENT
+f7fbb000-f7fbc000 r--p 00000000 fc:01 7805                               /usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
+f7fbc000-f7fbd000 rw-p 00000000 00:00 0 
+f7fbd000-f7fbe000 ---p 00000000 00:00 0 
+f7fbe000-f7fc0000 rw-p 00000000 00:00 0 
+f7fc0000-f7fc3000 r--p 00000000 00:00 0                                  [vvar]
+f7fc3000-f7fc5000 r-xp 00000000 00:00 0                                  [vdso]
+f7fc5000-f7feb000 r-xp 00000000 fc:01 1032194                            /lib32/ld-2.27.so
+f7feb000-f7fec000 r--p 00025000 fc:01 1032194                            /lib32/ld-2.27.so
+f7fec000-f7fed000 rw-p 00026000 fc:01 1032194                            /lib32/ld-2.27.so
+fff84000-fffa5000 rw-p 00000000 00:00 0                                  [stack]
+
+VM Arguments:
+jvm_args: -Xmx1g 
+java_command: org.apache.spark.deploy.SparkSubmit --conf spark.master=spark://192.168.2.81:7077 --conf spark.app.name=nucleotide_div --conf spark.shuffle.service.enabled=False --conf spark.executor.cores=1 --conf spark.dynamicAllocation.executorIdleTimeout=30s --conf spark.dynamicAllocation.enabled=False pyspark-shell
+java_class_path (initial): /home/ubuntu/.local/lib/python3.6/site-packages/pyspark/conf:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/aopalliance-1.0.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-mllib_2.11-2.4.5.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-core-asl-1.9.13.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/parquet-hadoop-1.10.1.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-sketch_2.11-2.4.5.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/bonecp-0.8.0.RELEASE.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/orc-shims-1.5.5.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-jaxrs-1.9.13.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/shapeless_2.11-2.3.2.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-mapper-asl-1.9.13.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/logging-interceptor-3.12.0.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/scala-parser-combinators_2.11-1.1.0.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/macro-compat_2.11-1.1.1.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/arpack_combined_all-0.1.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/calcite-linq4j-1.2.0-incubating.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-mllib-local_2.11-2.4.5.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/protobuf-java-2.5.0.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/jackson-module-paranamer-2.7.9.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/spark-hive-thriftserver_2.11-2.4.5.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/hadoop-yarn-server-web-proxy-2.7.3.jar:/home/ubuntu/.local/lib/python3.6/site-packages/pyspark/jars/pyrolite-4.13.jar:/home/ubuntu/.local/lib/
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/jdk1.8.0_101
+PATH=/usr/bin:/home/ubuntu/.local/bin:/usr/lib/jvm/jdk1.8.0_101/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/hadoop-2.7.3/bin:/usr/local/scala/bin:/usr/local/spark/bin
+SHELL=/bin/bash
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x8d4e30], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0x8d4e30], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x753000], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x753000], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x753000], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x753000], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x754680], sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x755b30], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: SIG_IGN, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGTERM: [libjvm.so+0x755b30], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x755b30], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=18.04
+DISTRIB_CODENAME=bionic
+DISTRIB_DESCRIPTION="Ubuntu 18.04.4 LTS"
+
+uname:Linux 4.15.0-88-generic #88-Ubuntu SMP Tue Feb 11 20:11:34 UTC 2020 x86_64
+libc:glibc 2.27 NPTL 2.27 
+rlimit: STACK 8192k, CORE 0k, NPROC 15678, NOFILE 1048576, AS infinity
+load average:0.59 0.22 0.11
+
+/proc/meminfo:
+MemTotal:        4039172 kB
+MemFree:          107404 kB
+MemAvailable:        452 kB
+Buffers:             288 kB
+Cached:             2916 kB
+SwapCached:            0 kB
+Active:          3801260 kB
+Inactive:           1928 kB
+Active(anon):    3800712 kB
+Inactive(anon):      488 kB
+Active(file):        548 kB
+Inactive(file):     1440 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:                32 kB
+Writeback:            20 kB
+AnonPages:       3800276 kB
+Mapped:             1424 kB
+Shmem:               924 kB
+Slab:              68208 kB
+SReclaimable:      25244 kB
+SUnreclaim:        42964 kB
+KernelStack:       12256 kB
+PageTables:        20596 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     2019584 kB
+Committed_AS:    6936348 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      139120 kB
+DirectMap2M:     4055040 kB
+DirectMap1G:     2097152 kB
+
+
+CPU:total 2 (1 cores per cpu, 1 threads per core) family 6 model 42 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, tsc
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel Xeon E312xx (Sandy Bridge, IBRS update)
+stepping	: 1
+microcode	: 0x1
+cpu MHz		: 2194.498
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq vmx ssse3 cx16 pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx hypervisor lahf_lm cpuid_fault pti ssbd ibrs ibpb tpr_shadow vnmi flexpriority ept vpid tsc_adjust xsaveopt arat md_clear
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs itlb_multihit
+bogomips	: 4388.99
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel Xeon E312xx (Sandy Bridge, IBRS update)
+stepping	: 1
+microcode	: 0x1
+cpu MHz		: 2194.498
+cache size	: 16384 KB
+physical id	: 1
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq vmx ssse3 cx16 pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx hypervisor lahf_lm cpuid_fault pti ssbd ibrs ibpb tpr_shadow vnmi flexpriority ept vpid tsc_adjust xsaveopt arat md_clear
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs itlb_multihit
+bogomips	: 4388.99
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 4039172k(106784k free), swap 0k(0k free)
+
+vm_info: Java HotSpot(TM) Server VM (25.101-b13) for linux-x86 JRE (1.8.0_101-b13), built on Jun 22 2016 02:31:35 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Fri Jun  5 07:50:41 2020
+elapsed time: 15 seconds (0d 0h 0m 15s)
+
