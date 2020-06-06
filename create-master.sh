@@ -43,7 +43,7 @@ source .bashrc
 echo "master" > /home/ubuntu/hadoop-2.7.3/etc/hadoop/masters
 echo "master" > /home/ubuntu/hadoop-2.7.3/etc/hadoop/slaves
 
-for tmp in {1..$NUMBER_OF_SLAVES}
+for tmp in $(seq 1 $NUMBER_OF_SLAVES)
 do
     echo "slave"$tmp >> /home/ubuntu/hadoop-2.7.3/etc/hadoop/slaves
 done
@@ -139,33 +139,52 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 </property>
 </configuration>' > /home/ubuntu/hadoop-2.7.3/etc/hadoop/yarn-site.xml
 
-wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.tgz --output-file=scala.tgz
-tar xvf scala.tgz
+wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.tgz
+tar xvf scala-2.13.2.tgz
 sudo mv scala-2.13.2 /usr/local/scala
 
-echo "PATH = $PATH:/usr/local/scala/bin" >> .bashrc
+echo "PATH=$PATH:/usr/local/scala/bin" >> .bashrc
 source .bashrc
 
-wget http://apache.mirrors.spacedump.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz --output-file=spark.tgz
-tar xvf spark.tgz
+wget http://apache.mirrors.spacedump.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
+tar xvf spark-2.4.5-bin-hadoop2.7.tgz
 sudo mv spark-2.4.5-bin-hadoop2.7 /usr/local/spark
 
-echo "PATH = $PATH:/usr/local/spark/bin" >> .bashrc
+echo "PATH=$PATH:/usr/local/spark/bin" >> .bashrc
 source .bashrc
 
+sudo chown -R ubuntu /home/ubuntu/hadoop-2.7.3
+sudo chown -R ubuntu /usr/local/spark
+sudo chown -R ubuntu /usr/local/scala
+
 cp /usr/local/spark/conf/spark-env.sh.template /usr/local/spark/conf/spark-env.sh
-echo "SPARK_MASTER_HOST='$(hostname -I)'" >> /usr/local/spark/conf/spark-env.sh
+echo "SPARK_MASTER_HOST='$(hostname -I | xargs)'" >> /usr/local/spark/conf/spark-env.sh
 
 # Check placement
 echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /usr/local/spark/conf/spark-env.sh
 
 
-for tmp in {1..$NUMBER_OF_SLAVES}
+
+touch /usr/local/spark/conf/slaves
+
+for tmp in $(seq 1 $NUMBER_OF_SLAVES)
 do
     echo "slave"$tmp >> /usr/local/spark/conf/slaves
 done
 
+echo "export PYSPARK_PYTHON=python3" >> ~/.bashrc
+source ~/.bashrc
+sudo apt-get install -y git
+sudo apt-get install -y python3-pip
+python3 -m pip install pip
+python3 -m pip install pyspark==2.4.5 --user
+python3 -m pip install pandas --user
+python3 -m pip install matplotlib --user
+sudo apt install -y jupyter-notebook
+
+
+
 # AFTER CLUSTER IS UP
 #/home/ubuntu/hadoop-2.7.3/bin/hadoop namenode -format
 #/home/ubuntu/hadoop-2.7.3/sbin/start-all.sh
-#/usr/local/spark/sbin/start-master.sh
+#/usr/local/spark/sbin/start-all.sh

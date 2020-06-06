@@ -3,26 +3,25 @@
 
 PUBLIC_KEY=$1
 
-let NUMBER_OF_SLAVES=$#-1
+let NUMBER_OF_SLAVES=$#-2
 let slave=0
 
-sudo apt-get update
-sudo apt-get upgrade -y
-
-echo "$2 master" > /etc/hosts
+sudo echo "$2 master" > /etc/hosts
 
 for ip in "$@"
 do
     if [ $slave -gt 1 ]
-then
-    let tmp_slave=$slave-1
-    echo $ip "slave"$tmp_slave >> /etc/hosts
-    let slave+=1
-else
-    let slave+=1
-fi
-    
+    then
+    	let tmp_slave=$slave-1
+    	sudo echo $ip "slave"$tmp_slave >> /etc/hosts
+    	let slave+=1
+    else
+    	let slave+=1
+    fi
 done
+
+sudo apt-get update
+sudo apt-get upgrade -y
 
 sudo service sshd restart
 mkdir .ssh
@@ -50,10 +49,11 @@ source .bashrc
 echo "master" > /home/ubuntu/hadoop-2.7.3/etc/hadoop/masters
 echo "master" > /home/ubuntu/hadoop-2.7.3/etc/hadoop/slaves
 
-for tmp in {1..$NUMBER_OF_SLAVES}
+for tmp in $(seq 1 $NUMBER_OF_SLAVES)
 do
     echo "slave"$tmp >> /home/ubuntu/hadoop-2.7.3/etc/hadoop/slaves
 done
+
 
 echo '# Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -142,18 +142,18 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 </property>
 </configuration>' > /home/ubuntu/hadoop-2.7.3/etc/hadoop/yarn-site.xml
 
-wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.tgz --output-file=scala.tgz
-tar xvf scala.tgz
+wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.tgz
+tar xvf scala-2.13.2.tgz
 sudo mv scala-2.13.2 /usr/local/scala
 
-echo "PATH = $PATH:/usr/local/scala/bin" >> .bashrc
+echo "PATH=$PATH:/usr/local/scala/bin" >> .bashrc
 source .bashrc
 
-wget http://apache.mirrors.spacedump.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz --output-file=spark.tgz
-tar xvf spark.tgz
+wget http://apache.mirrors.spacedump.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
+tar xvf spark-2.4.5-bin-hadoop2.7.tgz
 sudo mv spark-2.4.5-bin-hadoop2.7 /usr/local/spark
 
-echo "PATH = $PATH:/usr/local/spark/bin" >> .bashrc
+echo "PATH=$PATH:/usr/local/spark/bin" >> .bashrc
 source .bashrc
 
 cp /usr/local/spark/conf/spark-env.sh.template /usr/local/spark/conf/spark-env.sh
@@ -162,8 +162,13 @@ echo "SPARK_MASTER_HOST='$(hostname -I)'" >> /usr/local/spark/conf/spark-env.sh
 # Check placement
 echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /usr/local/spark/conf/spark-env.sh
 
-
-for tmp in {1..$NUMBER_OF_SLAVES}
+for tmp in $(seq 1 $NUMBER_OF_SLAVES)
 do
     echo "slave"$tmp >> /usr/local/spark/conf/slaves
 done
+
+sudo chown ubuntu /home/ubuntu/hadoop-2.7.3
+sudo chown ubuntu /usr/local/spark
+sudo chown ubuntu /usr/local/scala
+
+#sudo bash create-slave.sh "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWaxlsq90EH+b4BBW46c/e2jRQyM6T4PGMX3jia9TkE8keSqgbDfKFxjqz7Q4bwFeXYsyMYu9bWNkS3byLTLF1YVbO/0SIoHGpt/qaPlEyfMmjDmMjcdNs6/pcFJMPD6/+8a508kH7LiCO9xVEYBJoJVk3u1NEZ4Bw5BE+XoJiYZvwHCqR0IaDB9j5S41dmdJy+MYIJ6EuT72jEi6w7fatrL7oK9alRrtLb5xZrV/ceJBlHPThqVOMPbzzah6A8+U+XWqmQ5fMw7sMnLpR0J/wO61lEY/jfykxEjhxUKJI92KlCCnZ6wBwhvLNBwKVqx+257P+Xwcp0RUKm7Ffingp root@master" 192.168.2.231 192.168.2.20 192.168.2.170 192.168.2.161 192.168.2.254
