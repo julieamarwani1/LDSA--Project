@@ -24,6 +24,8 @@ cat $HOME/.ssh/master-key.pub >> $HOME/.ssh/authorized_keys
 sudo apt-get install openjdk-8-jdk -y
 wget https://archive.apache.org/dist/hadoop/core/hadoop-2.7.3/hadoop-2.7.3.tar.gz
 tar -xvf hadoop-2.7.3.tar.gz
+sudo chown -R ubuntu /home/ubuntu/hadoop-2.7.3
+
 echo 'if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
@@ -142,6 +144,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.tgz
 tar xvf scala-2.13.2.tgz
 sudo mv scala-2.13.2 /usr/local/scala
+sudo chown -R ubuntu /usr/local/scala
 
 echo "PATH=$PATH:/usr/local/scala/bin" >> .bashrc
 source .bashrc
@@ -149,21 +152,14 @@ source .bashrc
 wget http://apache.mirrors.spacedump.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
 tar xvf spark-2.4.5-bin-hadoop2.7.tgz
 sudo mv spark-2.4.5-bin-hadoop2.7 /usr/local/spark
+sudo chown -R ubuntu /usr/local/spark
 
 echo "PATH=$PATH:/usr/local/spark/bin" >> .bashrc
 source .bashrc
 
-sudo chown -R ubuntu /home/ubuntu/hadoop-2.7.3
-sudo chown -R ubuntu /usr/local/spark
-sudo chown -R ubuntu /usr/local/scala
-
 cp /usr/local/spark/conf/spark-env.sh.template /usr/local/spark/conf/spark-env.sh
 echo "SPARK_MASTER_HOST='$(hostname -I | xargs)'" >> /usr/local/spark/conf/spark-env.sh
-
-# Check placement
 echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /usr/local/spark/conf/spark-env.sh
-
-
 
 touch /usr/local/spark/conf/slaves
 
@@ -181,10 +177,3 @@ python3 -m pip install pyspark==2.4.5 --user
 python3 -m pip install pandas --user
 python3 -m pip install matplotlib --user
 sudo apt install -y jupyter-notebook
-
-
-
-# AFTER CLUSTER IS UP
-#/home/ubuntu/hadoop-2.7.3/bin/hadoop namenode -format
-#/home/ubuntu/hadoop-2.7.3/sbin/start-all.sh
-#/usr/local/spark/sbin/start-all.sh

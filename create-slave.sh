@@ -30,6 +30,7 @@ echo $PUBLIC_KEY >> $HOME/.ssh/authorized_keys
 sudo apt-get install openjdk-8-jdk -y
 wget https://archive.apache.org/dist/hadoop/core/hadoop-2.7.3/hadoop-2.7.3.tar.gz
 tar -xvf hadoop-2.7.3.tar.gz
+sudo chown ubuntu /home/ubuntu/hadoop-2.7.3
 echo 'if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
@@ -145,6 +146,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.tgz
 tar xvf scala-2.13.2.tgz
 sudo mv scala-2.13.2 /usr/local/scala
+sudo chown ubuntu /usr/local/scala
 
 echo "PATH=$PATH:/usr/local/scala/bin" >> .bashrc
 source .bashrc
@@ -152,6 +154,7 @@ source .bashrc
 wget http://apache.mirrors.spacedump.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
 tar xvf spark-2.4.5-bin-hadoop2.7.tgz
 sudo mv spark-2.4.5-bin-hadoop2.7 /usr/local/spark
+sudo chown ubuntu /usr/local/spark
 
 echo "PATH=$PATH:/usr/local/spark/bin" >> .bashrc
 source .bashrc
@@ -159,16 +162,9 @@ source .bashrc
 cp /usr/local/spark/conf/spark-env.sh.template /usr/local/spark/conf/spark-env.sh
 echo "SPARK_MASTER_HOST='$(hostname -I)'" >> /usr/local/spark/conf/spark-env.sh
 
-# Check placement
 echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /usr/local/spark/conf/spark-env.sh
 
 for tmp in $(seq 1 $NUMBER_OF_SLAVES)
 do
     echo "slave"$tmp >> /usr/local/spark/conf/slaves
 done
-
-sudo chown ubuntu /home/ubuntu/hadoop-2.7.3
-sudo chown ubuntu /usr/local/spark
-sudo chown ubuntu /usr/local/scala
-
-#sudo bash create-slave.sh "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWaxlsq90EH+b4BBW46c/e2jRQyM6T4PGMX3jia9TkE8keSqgbDfKFxjqz7Q4bwFeXYsyMYu9bWNkS3byLTLF1YVbO/0SIoHGpt/qaPlEyfMmjDmMjcdNs6/pcFJMPD6/+8a508kH7LiCO9xVEYBJoJVk3u1NEZ4Bw5BE+XoJiYZvwHCqR0IaDB9j5S41dmdJy+MYIJ6EuT72jEi6w7fatrL7oK9alRrtLb5xZrV/ceJBlHPThqVOMPbzzah6A8+U+XWqmQ5fMw7sMnLpR0J/wO61lEY/jfykxEjhxUKJI92KlCCnZ6wBwhvLNBwKVqx+257P+Xwcp0RUKm7Ffingp root@master" 192.168.2.231 192.168.2.20 192.168.2.170 192.168.2.161 192.168.2.254
